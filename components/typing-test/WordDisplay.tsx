@@ -46,16 +46,16 @@ export function WordDisplay({
   }, [currentWordIndex, currentInput]);
   
   return (
-    <div className="relative w-full max-w-4xl mx-auto">
+    <div className="relative w-full max-w-6xl mx-auto">
       <div 
         ref={containerRef}
         className={cn(
-          "w-full bg-background/5 rounded-lg p-8 mb-8 h-64 overflow-hidden transition-all duration-200",
+          "w-full rounded-lg p-8 mb-8 h-[400px] overflow-hidden transition-all duration-200",
           !isFocused && "blur-sm"
         )}
-        style={{ lineHeight: '1.8' }}
+        style={{ lineHeight: '2' }}
       >
-        <div className="text-[1.5rem] font-mono tracking-wide transition-all duration-200">
+        <div className="text-[1.5rem] font-mono tracking-wide whitespace-pre-wrap break-words">
           {wordList.map((word, wordIndex) => {
             const isActive = wordIndex === currentWordIndex;
             const isPast = wordIndex < currentWordIndex;
@@ -66,8 +66,7 @@ export function WordDisplay({
                 ref={isActive ? activeWordRef : null}
                 className={cn(
                   "px-[2px] transition-colors duration-200",
-                  isPast && "text-yellow-500/50 dark:text-yellow-400/50",
-                  isActive && "bg-primary/5"
+                  isPast && "text-muted-foreground"
                 )}
               >
                 {isActive ? (
@@ -83,14 +82,14 @@ export function WordDisplay({
                           key={charIndex}
                           className={cn(
                             "relative transition-all duration-150",
-                            isTyped && isCorrect && "text-yellow-500 dark:text-yellow-400",
-                            isError && "text-red-500 dark:text-red-400",
+                            isTyped && isCorrect && "text-[#facc15]",
+                            isError && "text-[#ef4444]",
                             !isTyped && "text-foreground/20"
                           )}
                         >
                           {char}
                           {isCursor && isFocused && (
-                            <span className="absolute inset-0 w-[2px] bg-yellow-500 dark:bg-yellow-400 animate-pulse" />
+                            <span className="absolute inset-0 w-[2px] bg-[#facc15] animate-pulse" />
                           )}
                         </span>
                       );
